@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Bonne alternance - Widget</title>
+
+  <style>
+    .preview {
+      width: 100%;
+      max-width: 1100px;
+      margin: 80px auto;
+      border: 1px dashed rgba(0, 0, 0, 0.2);
+      position: relative;
+      display: block;
+    }
+
+    .preview::before {
+      content: 'WIDGET PREVIEW';
+      position: absolute;
+      display: block;
+      top: -18px;
+      font-size: 11px;
+      color: rgba(0, 0, 0, 0.5);
+    }
+  </style>
+
+</head>
+
+<body>
+  <labonnealternance-widget class="preview" data-widget-name="XXX"></labonnealternance-widget>
+  <!-- <labonnealternance-widget class="preview" data-widget-name="XXX"></labonnealternance-widget> -->
+  <script async src="/bundle.js"></script>
+</body>
+
+</html>
