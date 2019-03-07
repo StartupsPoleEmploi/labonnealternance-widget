@@ -1,0 +1,200 @@
+// VARIABLES
+$font: 'Signika', sans-serif;
+$blue: #066EE7;
+$blue-hover: #0562CE;
+$gradient-background: linear-gradient(to top right, cyan, blue , purple, magenta);
+
+@font-face {
+    font-family: 'Signika';
+    font-display: swap;
+    font-style: normal;
+    font-weight: 400;
+    src: local('Signika Regular'), local('Signika-Regular'), url(https://fonts.gstatic.com/s/signika/v8/vEFR2_JTCgwQ5ejvG1EmBg.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+labonnealternance-widget {
+	// RESET STYLES
+	// TODO: more reset
+	font: 16px 'Signika', 'Helvetica Neue', arial, sans-serif;
+	font-weight: 400;
+
+	* { box-sizing: border-box; margin: 0; padding: 0; }
+	.sr-only { position: absolute !important; left: -10000px !important; top: -10000px !important; }
+
+
+	// BUTTONS
+	.button {
+		background-color: $blue;
+		color: white;
+		border-radius: 20px;
+		padding: 8px 60px;
+		font-weight: bold;
+		font-size: 25px;
+		text-decoration: none;
+		border: none;
+
+		&:hover {
+			background-color: $blue-hover;
+			cursor: pointer;
+		}
+		@media (max-width: 768px) { padding: 8px 30px; }
+	}
+
+	// INPUT
+	input[type=text] {
+		background-color: white;
+		color: #066EE7;
+		border-radius: 20px;
+		padding: 15px 30px;
+		border: 1px solid #d3d3d3;
+		width: 100%;
+		font-size: 0.85em;
+	}
+
+	// PAGES
+	.content {
+		position: relative;
+		height: 100%;
+		width: 100%;
+		padding: 10px;
+		background: $gradient-background;
+
+		> div {
+			height: 100%;
+			width: 100%;
+			padding: 30px 60px;
+			background-color: white;
+			@media (max-width: 768px) { padding: 30px; }
+		}
+	}
+
+	header {
+		text-align: center;
+		img { height: 40px; }
+		img:first-child { margin-right: 30px; }
+	}
+
+	// HOME
+	#home > div {
+		display: flex;
+		flex-direction: column;
+
+		h1 {
+			margin: 30px 0 0 0;
+			font-weight: normal;
+		}
+		.button-container {
+			text-align: center;
+			padding: 30px 0 0 0;
+		}
+	}
+
+	// SEARCH
+	#search > div {
+		> div { margin-bottom: 30px; }
+		#job-form-step, #location-form-step, .submit-container{ margin-top: 30px; }
+
+		h2 { margin-bottom: 10px; }
+		.submit-container {
+			text-align: center;
+			input { font-size: 1.5em; }
+		}
+
+		ul.suggestion {
+			margin-top: 10px;
+			list-style: none;
+			border-radius: 5px;
+			border: solid 1px #a9a9a9;
+
+			li {
+				padding: 7px 10px;
+				border-bottom: 1px solid #a9a9a9;
+				text-transform: capitalize;
+				width: 100%;
+				height: 100%;
+				background: transparent;
+				font-size: 1em;
+				color: #333;
+				text-align: center;
+				&:hover, &.current {
+					background-color: #dcdcdc;
+					text-decoration: underline;
+					cursor: pointer;
+				}
+			}
+		}
+	}
+
+	// RESULTS
+	#results {
+		.loader-logo {
+			text-align: center;
+			margin: 30px 0 10px 0;
+		}
+
+		.result-title {
+			display: flex;
+			align-items: center;
+			margin-top: 30px;
+			margin-bottom: 20px;
+
+			h1 { flex: 3; font-size: 1.5em; float: left; }
+			a { flex: 1; float: right; text-align: right; }
+		}
+
+		h2 {
+			margin-top: 10px;
+			font-size: 1.25em;
+			margin-bottom: 10px;
+		}
+
+		.company {
+			margin-bottom: 30px;
+			padding: 15px 25px;
+			border: solid 1px darkgray;
+			border-radius: 5px;
+		}
+
+		.distance {
+			margin-bottom: 10px;
+		}
+
+		.link-container {
+			text-align: center;
+			a {
+				color: white;
+				text-decoration: none;
+				&:hover {
+					text-decoration: underline;
+					cursor: pointer;
+				}
+			}
+		}
+	}
+
+
+	// OTHER
+	.loader-logo {
+        img {
+            -webkit-animation: rotate 5s linear infinite;
+            animation: rotate 5s linear infinite;
+
+			@-webkit-keyframes rotate {
+				0% { -webkit-transform: rotate(0deg); }
+				100% { -webkit-transform: rotate(360deg); }
+			}
+
+			@keyframes rotate {
+				0% { transform: rotate(0deg); }
+				100% { transform: rotate(360deg); }
+			}
+        }
+	}
+
+	.arrow {
+		position: relative;
+		top: 3px;
+		margin-right: 7px;
+	}
+}
