@@ -83,7 +83,8 @@ labonnealternance-widget {
     margin-top: 10px;
     list-style: none;
     border-radius: 5px;
-    border: solid 1px #a9a9a9; }
+    border: solid 1px #a9a9a9;
+    border-bottom: none; }
     labonnealternance-widget #search > div ul.suggestion li {
       padding: 7px 10px;
       border-bottom: 1px solid #a9a9a9;

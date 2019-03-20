@@ -10,7 +10,7 @@ RUN apt-get install -y nodejs
 RUN node -v
 RUN npm -v
 
-# PREACR
+# PREACT
 RUN npm install -g preact-cli
 
 # Install React project
@@ -27,10 +27,5 @@ WORKDIR /code/
 RUN ln -s /usr/local/preact_temp/node_modules node_modules
 RUN npm run build
 
-
-## NGINX
-RUN add-apt-repository -y ppa:nginx/stable
-RUN apt-get update
-RUN apt-get install -y nginx
-
-CMD ["ls"]
+RUN ls
+RUN ls -l build/

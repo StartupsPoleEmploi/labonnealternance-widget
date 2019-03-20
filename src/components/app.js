@@ -15,7 +15,7 @@ export default class App extends Component {
     super(props);
 
     // Init the service
-    LBBService.init(props.dataToken, this.dispatch);
+    LBBService.init(props.dataWidgetName, this.dispatch);
     Object.freeze(LBBService);
 
     this.state = { store: reducer(undefined, {}) }

@@ -1,24 +1,28 @@
 import { ACTIONS } from "./store";
 import { cleanTerm } from "./helper";
 
-const SUGGEST_JOBS_URL = 'https://labonneboite.pole-emploi.fr/suggest_job_labels?term=';
-const HEADERS = { mode: 'no-cors' }
+const HEADERS = { 'Accept': 'application/json', 'Content-Type': 'application/json'}
 
 export const RESULT_NUMBER = 3;
 
+
+const DOMAIN = 'http://localhost:8000';
+const SUGGEST_JOBS_URL = `${DOMAIN}/api/labonneboite/suggest_jobs?term=`;
+const SUGGEST_CITY_URL = `${DOMAIN}/api/labonneboite/suggest_cities?term=`;
+const GET_COMPANIES_URL = `${DOMAIN}/api/labonneboite/get_companies?page=1&pageSize=3&distance=60`;
+
 class LBBServiceInstance {
-    constructor(token, dispatchFn) {
-        this.token = token;
+    constructor(widgetName, dispatchFn) {
+        this.widgetName = widgetName;
         this.dispatch = dispatchFn;
     }
 
     getJobSuggestions(term) {
+        let url = `${SUGGEST_JOBS_URL}${cleanTerm(term)}&widget-name=${this.widgetName}`;
 
-        let url = SUGGEST_JOBS_URL + cleanTerm(term);
         return new Promise((resolve, reject) => {
-            resolve(fakeJobs); return;
 
-            fetch(url, HEADERS)
+            fetch(url, { headers: HEADERS, mode: 'cors' })
                 .then(response => {
                     if (response.status === 200) return response.json();
                 })
@@ -31,10 +35,9 @@ class LBBServiceInstance {
 
 
     getLocationSuggestions(term) {
-        const url = 'TODO';
-        return new Promise((resolve, reject) => {
-            resolve(fakeLocation); return;
+        let url = `${SUGGEST_CITY_URL}${cleanTerm(term)}&widget-name=${this.widgetName}`;
 
+        return new Promise((resolve, reject) => {
             fetch(url, HEADERS)
                 .then(response => {
                     if (response.status === 200) return response.json();
@@ -48,12 +51,13 @@ class LBBServiceInstance {
 
 
     getResults(job, location) {
-        // TODO : limit to 3 results in URL
-        const url = 'TODO'
+        let url = GET_COMPANIES_URL;
+        url = url.concat('&romes=', job.id)
+        .concat('&longitude=', location.longitude)
+        .concat('&latitude=', location.latitude)
+        .concat('&widget-name=', this.widgetName);
 
         return new Promise((resolve, reject) => {
-            resolve(fakeResults); return;
-
             fetch(url, HEADERS)
                 .then(response => {
                     if (response.status === 200) return response.json();
@@ -77,10 +81,10 @@ class LBBServiceFactory {
         this.instance = null;
     }
 
-    init(token, dispatchFn) {
-        if(!token) throw new Error("No token or given");
+    init(widgetName, dispatchFn) {
+        if(!widgetName) throw new Error("No widgetName or given");
 
-        this.instance = new LBBServiceInstance(token, dispatchFn);
+        this.instance = new LBBServiceInstance(widgetName, dispatchFn);
         Object.freeze(this.instance);
         return this.instance;
     }
