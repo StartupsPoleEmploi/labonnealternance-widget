@@ -2,23 +2,33 @@ import { ACTIONS } from "./store";
 import { cleanTerm } from "./helper";
 
 const HEADERS = { 'Accept': 'application/json', 'Content-Type': 'application/json'}
+const HEADERS_ESD = {}
 
 export const RESULT_NUMBER = 3;
 
 
 const DOMAIN = 'http://localhost:8000';
+const ESD_URL = 'https://api.emploi-store.fr/partenaire/labonneboite/v1/company/?pageSize=3&page=1';
 const SUGGEST_JOBS_URL = `${DOMAIN}/api/labonneboite/suggest_jobs?term=`;
 const SUGGEST_CITY_URL = `${DOMAIN}/api/labonneboite/suggest_cities?term=`;
 const GET_COMPANIES_URL = `${DOMAIN}/api/labonneboite/get_companies?page=1&pageSize=3&distance=60`;
 
 class LBBServiceInstance {
-    constructor(widgetName, dispatchFn) {
-        this.widgetName = widgetName;
+    constructor({ widgetName, ESDToken, useESD, dispatchFn }) {
+        if(useESD) {
+            this.ESDToken = ESDToken;
+            this.useESD = true;
+            this.ESDHeaders = Object.assign(HEADERS_ESD, { 'Authorization': `Bearer ${ESDToken}` });
+        } else {
+            this.widgetName = widgetName;
+            this.useESD = false;
+        }
         this.dispatch = dispatchFn;
     }
 
     getJobSuggestions(term) {
-        let url = `${SUGGEST_JOBS_URL}${cleanTerm(term)}&widget-name=${this.widgetName}`;
+        let url = `${SUGGEST_JOBS_URL}${cleanTerm(term)}`;
+        if(!this.useESD) url = url.concat(`&widget-name=${this.widgetName}`);
 
         return new Promise((resolve, reject) => {
 
@@ -35,7 +45,8 @@ class LBBServiceInstance {
 
 
     getLocationSuggestions(term) {
-        let url = `${SUGGEST_CITY_URL}${cleanTerm(term)}&widget-name=${this.widgetName}`;
+        let url = `${SUGGEST_CITY_URL}${cleanTerm(term)}`;
+        if(!this.useESD) url = url.concat(`&widget-name=${this.widgetName}`);
 
         return new Promise((resolve, reject) => {
             fetch(url, HEADERS)
@@ -51,14 +62,31 @@ class LBBServiceInstance {
 
 
     getResults(job, location) {
+        return this.useESD ? this.getResultsFromESD(job, location) : this.getResultsFromLBA(job, location);
+    }
+
+    getResultsFromESD(job, location) {
+        let url = ESD_URL;
+        url = url.concat('&rome_codes=', job.id)
+        .concat('&longitude=', location.longitude)
+        .concat('&latitude=', location.latitude);
+
+        return this.doRequest(url, this.ESDHeaders);
+    }
+
+    getResultsFromLBA(job, location) {
         let url = GET_COMPANIES_URL;
         url = url.concat('&romes=', job.id)
         .concat('&longitude=', location.longitude)
         .concat('&latitude=', location.latitude)
         .concat('&widget-name=', this.widgetName);
 
+        return this.doRequest(url, HEADERS);
+    }
+
+    doRequest(url, headers) {
         return new Promise((resolve, reject) => {
-            fetch(url, HEADERS)
+            fetch(url, { headers })
                 .then(response => {
                     if (response.status === 200) return response.json();
                 })
@@ -81,10 +109,14 @@ class LBBServiceFactory {
         this.instance = null;
     }
 
-    init(widgetName, dispatchFn) {
-        if(!widgetName) throw new Error("No widgetName or given");
+    init(ESDToken, dispatchFn) {
+        this.instance = new LBBServiceInstance({ ESDToken, dispatchFn, useESD: true }, true);
+        Object.freeze(this.instance);
+        return this.instance;
+    }
 
-        this.instance = new LBBServiceInstance(widgetName, dispatchFn);
+    initWithoutESD(widgetName, dispatchFn) {
+        this.instance = new LBBServiceInstance({ widgetName, dispatchFn, useESD: false });
         Object.freeze(this.instance);
         return this.instance;
     }

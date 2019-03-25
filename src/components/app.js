@@ -15,7 +15,18 @@ export default class App extends Component {
     super(props);
 
     // Init the service
-    LBBService.init(props.dataWidgetName, this.dispatch);
+    if(props.dataEsdWidgetToken) {
+      LBBService.init(props.dataEsdWidgetToken, this.dispatch);
+    } else if(props.dataWidgetName) {
+      // No ESD
+      LBBService.initWithoutESD(props.dataWidgetName, this.dispatch);
+    } else {
+      // Error message
+      throw new Error(`No data-esd-widget-token given. Exemple: <labonnealternance-widget data-esd-widget-token="XXX"></labonnealternance-widget>`)
+    }
+
+
+
     Object.freeze(LBBService);
 
     this.state = { store: reducer(undefined, {}) }
