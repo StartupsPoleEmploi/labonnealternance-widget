@@ -41,7 +41,7 @@ export default class Results extends Component {
       <div>
         { companies.map((company, index) => (index < RESULT_NUMBER && <CompanyItem company={company} location={store.locationChosen} job={store.jobChosen} />)) }
         <div className="link-container button">
-          <a href={this.state.lbaURL}>Découvrez d’autres entreprises partout en France sur La Bonne alternance</a>
+          <a target="_blank" title="(Nouvelle fenêtre)" href={this.state.lbaURL}>Découvrez d’autres entreprises partout en France sur La Bonne alternance</a>
         </div>
       </div>
     }
@@ -49,8 +49,8 @@ export default class Results extends Component {
     return (
       <div>
         { companies.map((company, index) => (index < RESULT_NUMBER && <CompanyItem company={company} location={store.locationChosen} job={store.jobChosen} />)) }
-        <div className="link-container button">
-          <a href={this.state.lbaURL}>Découvrez {} autres entreprises sur La Bonne alternance</a>
+        <div className="link-container button">entreprisesNumber
+          <a target="_blank" title="(Nouvelle fenêtre)" href={this.state.lbaURL}>Découvrez {entreprisesNumber} autres entreprises sur La Bonne alternance</a>
         </div>
       </div>
     );
