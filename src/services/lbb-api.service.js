@@ -99,7 +99,7 @@ class LBBServiceInstance {
     }
 
     computeLBaUrlData(job, location) {
-        return `${job.occupation}/${location.city}-${location.zipcode}/${job.occupation}`;
+        return `${job.occupation}/${location.city}-${location.zipcode}/${job.occupation}?distance=60`;
     }
 }
 

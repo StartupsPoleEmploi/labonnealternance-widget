@@ -151,14 +151,14 @@ export default class Search extends Component {
 
           <form method="POST" action={WIDGET_STEPS.RESULTS} onSubmit={this.submitForm}>
             <div id="job-form-step">
-              <h2><label for="job_input">Dans quel métier/formation/domaine cherchez-vous ?</label></h2>
+              <h2><label for="job_input">Quel métier/formation/domaine cherchez-vous ?</label></h2>
               <input id="job-input" type="text" placeholder="Graphiste, maçon, second de cuisine..." onInput={this.autocompleteJob} value={jobInputText} onKeyDown={this.keyPressAutoCompleteJob} />
             </div>
             { this.renderJobSuggestion() }
 
 
             <div id="location-form-step">
-              <h2><label for="location-input">Où voulez-vous chercher votre future entreprise ?</label></h2>
+              <h2><label for="location-input">Où cherchez-vous votre entreprise ?</label></h2>
               <input id="location-input" type="text" placeholder="Ecrivez le nom de votre ville" value="" onInput={this.autocompleteLocation} value={locationInputText} onKeyDown={this.keyPressAutoCompleteLocation} />
             </div>
             { this.renderLocationSuggestion() }

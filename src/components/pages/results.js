@@ -38,10 +38,10 @@ export default class Results extends Component {
     const entreprisesNumber = companyCount - RESULT_NUMBER;
 
     if(entreprisesNumber <= 0) {
-      <div>
+      return <div>
         { companies.map((company, index) => (index < RESULT_NUMBER && <CompanyItem company={company} location={store.locationChosen} job={store.jobChosen} />)) }
         <div className="link-container button">
-          <a target="_blank" title="(Nouvelle fenêtre)" href={this.state.lbaURL}>Découvrez d’autres entreprises partout en France sur La Bonne alternance</a>
+          <a target="_blank" title="(Nouvelle fenêtre)" href={this.state.lbaURL}>Découvrez d’autres entreprises partout en France</a>
         </div>
       </div>
     }
@@ -49,8 +49,8 @@ export default class Results extends Component {
     return (
       <div>
         { companies.map((company, index) => (index < RESULT_NUMBER && <CompanyItem company={company} location={store.locationChosen} job={store.jobChosen} />)) }
-        <div className="link-container button">entreprisesNumber
-          <a target="_blank" title="(Nouvelle fenêtre)" href={this.state.lbaURL}>Découvrez {entreprisesNumber} autres entreprises sur La Bonne alternance</a>
+        <div className="link-container button">
+          <a target="_blank" title="(Nouvelle fenêtre)" href={this.state.lbaURL}>Découvrez {entreprisesNumber} autres entreprises</a>
         </div>
       </div>
     );
@@ -59,13 +59,20 @@ export default class Results extends Component {
     return (
       <main id="results">
         <div className="result-title">
-          <h1>Résultats de votre recherche</h1>
-          <Link dispatchFn={this.props.dispatch} step={WIDGET_STEPS.SEARCH} title="Retour à la page de recherche">Retour</Link>
+          {requestOccuring ? <h1>Un instant, nous recherchons des entreprises</h1> : <h1>Résultats de votre recherche</h1>}
+          {requestOccuring ? null : <Link dispatchFn={this.props.dispatch} step={WIDGET_STEPS.SEARCH} title="Retour à la page de recherche">Retour</Link> }
         </div>
         <div>
           { requestOccuring ? <Loader /> : null }
           { !requestOccuring && requestError ? <ErrorMessage text="Erreur lors de la récupération des résultats. Veuillez réessayer ultérieurement." /> : null }
-          { !requestOccuring && isEmpty(results.companies) ? <div>Pas de résultats trouvés pour votre recherche.</div> : null }
+          { !requestOccuring && isEmpty(results.companies) ?
+            <div className="center">
+              <div>Désolé, nous n’avons pas trouvé d’entreprises.</div>
+              <Link dispatchFn={this.props.dispatch} className="button" step={WIDGET_STEPS.SEARCH}>
+                Vous pouvez faire une nouvelle recherche
+              </Link>
+
+            </div> : null }
           { !requestOccuring && !isEmpty(results.companies) ? this.renderResults() : null }
         </div>
       </main>

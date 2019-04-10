@@ -12,9 +12,11 @@ export default class Home extends Component {
     return (
       <main id="home">
         <div>
-          <h1>Trouvez ici les 63 000 entreprises qui recrutent régulièrement en alternance</h1>
+          <h1>Boostez votre recherche, trouvez ici des entreprises qui recrutent souvent des alternants</h1>
           <div className="button-container">
-            <Link dispatchFn={this.props.dispatch} className="button" step={WIDGET_STEPS.SEARCH} title="Commencer à chercher">C'est parti</Link>
+            <Link dispatchFn={this.props.dispatch} className="button" step={WIDGET_STEPS.SEARCH} title="Commencer à chercher">
+              C'est parti
+            </Link>
           </div>
         </div>
       </main>

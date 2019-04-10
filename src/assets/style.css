@@ -90,14 +90,13 @@ labonnealternance-widget {
     border: solid 1px #a9a9a9;
     border-bottom: none; }
     labonnealternance-widget #search > div ul.suggestion li {
-      padding: 7px 10px;
+      padding: 7px 20px;
       border-bottom: 1px solid #a9a9a9;
       text-transform: capitalize;
       width: 100%;
       background: transparent;
       font-size: 1em;
-      color: #333;
-      text-align: center; }
+      color: #333; }
       labonnealternance-widget #search > div ul.suggestion li:hover, labonnealternance-widget #search > div ul.suggestion li.current {
         background-color: #dcdcdc;
         text-decoration: underline;
@@ -137,6 +136,11 @@ labonnealternance-widget {
       labonnealternance-widget #results .link-container a:hover {
         text-decoration: underline;
         cursor: pointer; }
+  labonnealternance-widget #results .center {
+    text-align: center; }
+    labonnealternance-widget #results .center > div {
+      margin-bottom: 30px;
+      text-align: left; }
   labonnealternance-widget .loader-logo img {
     -webkit-animation: rotate 5s linear infinite;
     animation: rotate 5s linear infinite; }

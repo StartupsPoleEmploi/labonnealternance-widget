@@ -108,14 +108,13 @@ labonnealternance-widget {
 			border-bottom: none;
 
 			li {
-				padding: 7px 10px;
+				padding: 7px 20px;
 				border-bottom: 1px solid #a9a9a9;
 				text-transform: capitalize;
 				width: 100%;
 				background: transparent;
 				font-size: 1em;
 				color: #333;
-				text-align: center;
 				&:hover, &.current {
 					background-color: #dcdcdc;
 					text-decoration: underline;
@@ -168,6 +167,14 @@ labonnealternance-widget {
 					text-decoration: underline;
 					cursor: pointer;
 				}
+			}
+		}
+
+		.center {
+			text-align: center;
+			> div {
+				margin-bottom: 30px;
+				text-align: left;
 			}
 		}
 	}
