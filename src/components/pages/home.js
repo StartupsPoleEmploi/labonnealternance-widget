@@ -14,7 +14,7 @@ export default class Home extends Component {
         <div>
           <h1>Boostez votre recherche, trouvez ici des entreprises qui recrutent souvent des alternants</h1>
           <div className="button-container">
-            <Link dispatchFn={this.props.dispatch} className="button" step={WIDGET_STEPS.SEARCH} title="Commencer à chercher">
+            <Link dispatchFn={this.props.dispatch} className="button" step={WIDGET_STEPS.SEARCH_JOB} title="Commencer à chercher">
               C'est parti
             </Link>
           </div>

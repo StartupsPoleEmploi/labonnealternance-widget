@@ -21,8 +21,7 @@ labonnealternance-widget {
 
 	* { box-sizing: border-box; margin: 0; padding: 0; font-size: 1em; color: black; }
 	.sr-only { position: absolute !important; left: -10000px !important; top: -10000px !important; }
-	h1 { font-size: 2em; }
-	h2 { font-size: 1.5em; }
+	h1 { font-size: 1.5em; }
 
 	// BUTTONS
 	.button {
@@ -70,7 +69,7 @@ labonnealternance-widget {
 
 	header {
 		text-align: center;
-		img { height: 40px; }
+		img { height: 70px; }
 		img:first-child { margin-right: 30px; }
 	}
 
@@ -82,6 +81,7 @@ labonnealternance-widget {
 		h1 {
 			margin: 30px 0 0 0;
 			font-weight: normal;
+			font-size: 2em;
 		}
 		.button-container {
 			text-align: center;
@@ -90,11 +90,11 @@ labonnealternance-widget {
 	}
 
 	// SEARCH
-	#search > div {
+	#search-jobs, #filter-jobs, #search-location {
 		> div { margin-bottom: 30px; }
 		#job-form-step, #location-form-step, .submit-container{ margin-top: 30px; }
 
-		h2 { margin-bottom: 10px; }
+		h1 { margin-bottom: 10px; }
 		.submit-container {
 			text-align: center;
 			input { font-size: 1.5em; }
@@ -120,6 +120,13 @@ labonnealternance-widget {
 					text-decoration: underline;
 					cursor: pointer;
 				}
+
+				&.rome-suggestion {
+					display: flex;
+					align-items: center;
+					.label { flex: 1; }
+					.cross { width: 40px; }
+				}
 			}
 		}
 	}
@@ -131,17 +138,7 @@ labonnealternance-widget {
 			margin: 30px 0 10px 0;
 		}
 
-		.result-title {
-			display: flex;
-			align-items: center;
-			margin-top: 30px;
-			margin-bottom: 20px;
-
-			h1 { flex: 3; font-size: 1.5em; float: left; }
-			a { flex: 1; float: right; text-align: right; }
-		}
-
-		h2 {
+		h1 {
 			margin-top: 10px;
 			font-size: 1.25em;
 			margin-bottom: 10px;
@@ -198,9 +195,26 @@ labonnealternance-widget {
         }
 	}
 
+	.alert {
+        border: solid 1px red;
+		background: #ffc2c2;
+		padding: 10px;
+		margin-top: 15px;
+	}
+
 	.arrow {
 		position: relative;
 		top: 3px;
 		margin-right: 7px;
+	}
+
+	.result-title {
+		display: flex;
+		align-items: center;
+		margin-top: 30px;
+		margin-bottom: 20px;
+
+		h1 { flex: 3; font-size: 1.5em; float: left; }
+		a { flex: 1; float: right; text-align: right; }
 	}
 }

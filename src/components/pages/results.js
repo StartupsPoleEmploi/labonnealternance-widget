@@ -23,9 +23,10 @@ export default class Results extends Component {
 
   componentDidMount() {
     const store = this.props.store;
-    const lbaURL = LBBService.getInstance().computeLBaUrl(store.jobChosen, store.locationChosen);
 
-    LBBService.getInstance().getResults(store.jobChosen, store.locationChosen)
+    const lbaURL = LBBService.getInstance().computeLBaUrl(store.jobText, store.jobsChosen, store.locationChosen);
+
+    LBBService.getInstance().getResults(store.jobsChosen, store.locationChosen)
       .then(results => this.setState({ results, requestOccuring: false, lbaURL }))
       .catch(() => this.setState({ requestError: true, requestOccuring: false }));
   }
@@ -39,16 +40,21 @@ export default class Results extends Component {
 
     if(entreprisesNumber <= 0) {
       return <div>
-        { companies.map((company, index) => (index < RESULT_NUMBER && <CompanyItem company={company} location={store.locationChosen} job={store.jobChosen} />)) }
         <div className="link-container button">
           <a target="_blank" title="(Nouvelle fenêtre)" href={this.state.lbaURL}>Découvrez d’autres entreprises partout en France</a>
         </div>
       </div>
     }
 
+    const extraData = {
+      location: store.locationChosen,
+      jobs: store.jobsChosen,
+      jobText: store.jobText,
+    }
+
     return (
       <div>
-        { companies.map((company, index) => (index < RESULT_NUMBER && <CompanyItem company={company} location={store.locationChosen} job={store.jobChosen} />)) }
+        {companies.map((company, index) => (index < RESULT_NUMBER && <CompanyItem company={company} {...extraData} />)) }
         <div className="link-container button">
           <a target="_blank" title="(Nouvelle fenêtre)" href={this.state.lbaURL}>Découvrez {entreprisesNumber} autres entreprises</a>
         </div>
@@ -60,7 +66,7 @@ export default class Results extends Component {
       <main id="results">
         <div className="result-title">
           {requestOccuring ? <h1>Un instant, nous recherchons des entreprises</h1> : <h1>Résultats de votre recherche</h1>}
-          {requestOccuring ? null : <Link dispatchFn={this.props.dispatch} step={WIDGET_STEPS.SEARCH} title="Retour à la page de recherche">Retour</Link> }
+          {requestOccuring ? null : <Link dispatchFn={this.props.dispatch} step={WIDGET_STEPS.SEARCH_JOB} title="Retour à la page de recherche">Retour</Link> }
         </div>
         <div>
           { requestOccuring ? <Loader /> : null }

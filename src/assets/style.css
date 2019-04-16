@@ -20,8 +20,6 @@ labonnealternance-widget {
     left: -10000px !important;
     top: -10000px !important; }
   labonnealternance-widget h1 {
-    font-size: 2em; }
-  labonnealternance-widget h2 {
     font-size: 1.5em; }
   labonnealternance-widget .button {
     background-color: #066EE7;
@@ -61,7 +59,7 @@ labonnealternance-widget {
   labonnealternance-widget header {
     text-align: center; }
     labonnealternance-widget header img {
-      height: 40px; }
+      height: 70px; }
     labonnealternance-widget header img:first-child {
       margin-right: 30px; }
   labonnealternance-widget #home > div {
@@ -69,27 +67,28 @@ labonnealternance-widget {
     flex-direction: column; }
     labonnealternance-widget #home > div h1 {
       margin: 30px 0 0 0;
-      font-weight: normal; }
+      font-weight: normal;
+      font-size: 2em; }
     labonnealternance-widget #home > div .button-container {
       text-align: center;
       padding: 30px 0 0 0; }
-  labonnealternance-widget #search > div > div {
+  labonnealternance-widget #search-jobs > div, labonnealternance-widget #filter-jobs > div, labonnealternance-widget #search-location > div {
     margin-bottom: 30px; }
-  labonnealternance-widget #search > div #job-form-step, labonnealternance-widget #search > div #location-form-step, labonnealternance-widget #search > div .submit-container {
+  labonnealternance-widget #search-jobs #job-form-step, labonnealternance-widget #search-jobs #location-form-step, labonnealternance-widget #search-jobs .submit-container, labonnealternance-widget #filter-jobs #job-form-step, labonnealternance-widget #filter-jobs #location-form-step, labonnealternance-widget #filter-jobs .submit-container, labonnealternance-widget #search-location #job-form-step, labonnealternance-widget #search-location #location-form-step, labonnealternance-widget #search-location .submit-container {
     margin-top: 30px; }
-  labonnealternance-widget #search > div h2 {
+  labonnealternance-widget #search-jobs h1, labonnealternance-widget #filter-jobs h1, labonnealternance-widget #search-location h1 {
     margin-bottom: 10px; }
-  labonnealternance-widget #search > div .submit-container {
+  labonnealternance-widget #search-jobs .submit-container, labonnealternance-widget #filter-jobs .submit-container, labonnealternance-widget #search-location .submit-container {
     text-align: center; }
-    labonnealternance-widget #search > div .submit-container input {
+    labonnealternance-widget #search-jobs .submit-container input, labonnealternance-widget #filter-jobs .submit-container input, labonnealternance-widget #search-location .submit-container input {
       font-size: 1.5em; }
-  labonnealternance-widget #search > div ul.suggestion {
+  labonnealternance-widget #search-jobs ul.suggestion, labonnealternance-widget #filter-jobs ul.suggestion, labonnealternance-widget #search-location ul.suggestion {
     margin-top: 10px;
     list-style: none;
     border-radius: 5px;
     border: solid 1px #a9a9a9;
     border-bottom: none; }
-    labonnealternance-widget #search > div ul.suggestion li {
+    labonnealternance-widget #search-jobs ul.suggestion li, labonnealternance-widget #filter-jobs ul.suggestion li, labonnealternance-widget #search-location ul.suggestion li {
       padding: 7px 20px;
       border-bottom: 1px solid #a9a9a9;
       text-transform: capitalize;
@@ -97,27 +96,21 @@ labonnealternance-widget {
       background: transparent;
       font-size: 1em;
       color: #333; }
-      labonnealternance-widget #search > div ul.suggestion li:hover, labonnealternance-widget #search > div ul.suggestion li.current {
+      labonnealternance-widget #search-jobs ul.suggestion li:hover, labonnealternance-widget #search-jobs ul.suggestion li.current, labonnealternance-widget #filter-jobs ul.suggestion li:hover, labonnealternance-widget #filter-jobs ul.suggestion li.current, labonnealternance-widget #search-location ul.suggestion li:hover, labonnealternance-widget #search-location ul.suggestion li.current {
         background-color: #dcdcdc;
         text-decoration: underline;
         cursor: pointer; }
+      labonnealternance-widget #search-jobs ul.suggestion li.rome-suggestion, labonnealternance-widget #filter-jobs ul.suggestion li.rome-suggestion, labonnealternance-widget #search-location ul.suggestion li.rome-suggestion {
+        display: flex;
+        align-items: center; }
+        labonnealternance-widget #search-jobs ul.suggestion li.rome-suggestion .label, labonnealternance-widget #filter-jobs ul.suggestion li.rome-suggestion .label, labonnealternance-widget #search-location ul.suggestion li.rome-suggestion .label {
+          flex: 1; }
+        labonnealternance-widget #search-jobs ul.suggestion li.rome-suggestion .cross, labonnealternance-widget #filter-jobs ul.suggestion li.rome-suggestion .cross, labonnealternance-widget #search-location ul.suggestion li.rome-suggestion .cross {
+          width: 40px; }
   labonnealternance-widget #results .loader-logo {
     text-align: center;
     margin: 30px 0 10px 0; }
-  labonnealternance-widget #results .result-title {
-    display: flex;
-    align-items: center;
-    margin-top: 30px;
-    margin-bottom: 20px; }
-    labonnealternance-widget #results .result-title h1 {
-      flex: 3;
-      font-size: 1.5em;
-      float: left; }
-    labonnealternance-widget #results .result-title a {
-      flex: 1;
-      float: right;
-      text-align: right; }
-  labonnealternance-widget #results h2 {
+  labonnealternance-widget #results h1 {
     margin-top: 10px;
     font-size: 1.25em;
     margin-bottom: 10px; }
@@ -156,7 +149,25 @@ labonnealternance-widget {
     transform: rotate(0deg); }
   100% {
     transform: rotate(360deg); } }
+  labonnealternance-widget .alert {
+    border: solid 1px red;
+    background: #ffc2c2;
+    padding: 10px;
+    margin-top: 15px; }
   labonnealternance-widget .arrow {
     position: relative;
     top: 3px;
     margin-right: 7px; }
+  labonnealternance-widget .result-title {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 20px; }
+    labonnealternance-widget .result-title h1 {
+      flex: 3;
+      font-size: 1.5em;
+      float: left; }
+    labonnealternance-widget .result-title a {
+      flex: 1;
+      float: right;
+      text-align: right; }

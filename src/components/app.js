@@ -1,9 +1,12 @@
 import { h, Component } from "preact";
 
 import Home from "./pages/home";
-import Search from "./pages/search";
 import Results from "./pages/results";
 import Header from "./generics/header";
+import SearchJobs from "./pages/select-jobs";
+import SearchLocation from "./pages/select-location";
+import FilterJobs from "./pages/filter-jobs";
+
 import { reducer, WIDGET_STEPS } from "../services/store";
 import { LBBService } from "../services/lbb-api.service";
 
@@ -27,8 +30,6 @@ export default class App extends Component {
       throw new Error(`No data-esd-widget-token given. Exemple: <labonnealternance-widget data-esd-widget-name="XXX" data-esd-widget-token="XXX"></labonnealternance-widget>`)
     }
 
-
-
     Object.freeze(LBBService);
 
     this.state = { store: reducer(undefined, {}) }
@@ -47,8 +48,10 @@ export default class App extends Component {
       <div class="content">
         <div>
           <Header dispatchFn={this.dispatch} />
-          { step === WIDGET_STEPS.HOME ? <Home path="/" {...extraProps} /> : null }
-          { step === WIDGET_STEPS.SEARCH ? <Search path="/recherche" {...extraProps} /> : null }
+          { step === WIDGET_STEPS.HOME ? <Home {...extraProps} /> : null }
+          { step === WIDGET_STEPS.SEARCH_JOB ? <SearchJobs {...extraProps} /> : null }
+          { step === WIDGET_STEPS.FILTER_JOBS ? <FilterJobs {...extraProps} /> : null }
+          {step === WIDGET_STEPS.SEARCH_LOCATION ? <SearchLocation path="/recherche" {...extraProps} /> : null }
           { step === WIDGET_STEPS.RESULTS ? <Results path="/resultats" {...extraProps} /> : null }
         </div>
       </div>

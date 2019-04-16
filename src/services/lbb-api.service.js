@@ -58,22 +58,26 @@ class LBBServiceInstance {
     }
 
 
-    getResults(job, location) {
-        return this.useESD ? this.getResultsFromESD(job, location) : this.getResultsFromLBA(job, location);
+    getResults(jobs, location) {
+        return this.useESD ? this.getResultsFromESD(jobs, location) : this.getResultsFromLBA(jobs, location);
     }
 
-    getResultsFromESD(job, location) {
+    getResultsFromESD(jobs, location) {
+        const romes = jobs.map(j => j.id).join(',');
+
         let url = ESD_URL;
-        url = url.concat('&rome_codes=', job.id)
+        url = url.concat('&rome_codes=', romes)
             .concat('&longitude=', location.longitude)
             .concat('&latitude=', location.latitude);
 
         return this.doRequest(url, this.ESDHeaders);
     }
 
-    getResultsFromLBA(job, location) {
+    getResultsFromLBA(jobs, location) {
+        const romes = jobs.map(j => j.id).join(',');
+
         let url = GET_COMPANIES_URL;
-        url = url.concat('&romes=', job.id)
+        url = url.concat('&romes=', romes)
             .concat('&longitude=', location.longitude)
             .concat('&latitude=', location.latitude)
             .concat('&widget-name=', this.widgetName);
@@ -94,12 +98,13 @@ class LBBServiceInstance {
         });
     }
 
-    computeLBaUrl(job, location) {
-        return `${DOMAIN}/entreprises/${this.computeLBaUrlData(job, location)}`;
+    computeLBaUrl(jobText, jobs, location) {
+        return `${DOMAIN}/entreprises/${this.computeLBaUrlData(jobText, jobs, location)}`;
     }
 
-    computeLBaUrlData(job, location) {
-        return `${job.occupation}/${location.city}-${location.zipcode}/${job.occupation}?distance=60`;
+    computeLBaUrlData(jobText, jobs, location) {
+        const jobsString = jobs.map(j => j.occupation).join(',')
+        return `${jobsString}/${location.city}-${location.zipcode}/${jobText}?distance=60`;
     }
 }
 

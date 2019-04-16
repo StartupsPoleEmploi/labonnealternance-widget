@@ -7,8 +7,8 @@ export class CompanyItem extends Component {
     render() {
         const company = this.props.company;
 
-        const referer = LBBService.getInstance().computeLBaUrlData(this.props.job, this.props.location)
-        const url = `${DOMAIN}/details-entreprises/${company.siret}?referer=${encodeURIComponent(`/entreprises/${referer}`)}&rome=${this.props.job.id}`
+        const referer = LBBService.getInstance().computeLBaUrlData(this.props.jobText, this.props.jobs, this.props.location)
+        const url = `${DOMAIN}/details-entreprises/${company.siret}?referer=${encodeURIComponent(`/entreprises/${referer}`)}&rome=${company.matched_rome_code}`
 
         return (
             <div key={company.siret} className="company">
