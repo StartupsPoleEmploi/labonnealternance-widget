@@ -1,7 +1,7 @@
 import { h, Component } from "preact";
 
 import { LBBService } from "../../services/lbb-api.service";
-import { computeNewIndex, isEmpty } from "../../services/helper";
+import { isEmpty } from "../../services/helper";
 import { ACTIONS, WIDGET_STEPS } from "../../services/store";
 import ErrorMessage from "../generics/error";
 
@@ -33,7 +33,7 @@ export default class SearchJobs extends Component {
           data: { jobSuggestions }
         })
       })
-      .catch(() => this.setState({ jobError: true }));
+      .catch(() => this.setState({ jobError: true }));
   }
 
 
@@ -43,19 +43,19 @@ export default class SearchJobs extends Component {
 
     const jobSuggestions = this.props.store.jobSuggestions;
 
-    if(isEmpty(jobSuggestions)) {
+    if (isEmpty(jobSuggestions)) {
       this.setState({ canShowNoResult: true });
       return;
     }
 
     // Go to filter page or location page
-    if(jobSuggestions.length === 1) this.props.dispatch({ action: ACTIONS.SET_STEP, data: { step: WIDGET_STEPS.SEARCH_LOCATION } });
+    if (jobSuggestions.length === 1) this.props.dispatch({ action: ACTIONS.SET_STEP, data: { step: WIDGET_STEPS.SEARCH_LOCATION } });
     else this.props.dispatch({ action: ACTIONS.SET_STEP, data: { step: WIDGET_STEPS.FILTER_JOBS } });
   }
 
 
   // RENDER
-  render({}, { jobText, jobError, canShowNoResult }) {
+  render({ }, { jobText, jobError, canShowNoResult }) {
     const jobSuggestions = this.props.store.jobSuggestions || [];
     const noResult = jobSuggestions.length === 0 && jobText.length > 2;
 
@@ -70,8 +70,8 @@ export default class SearchJobs extends Component {
               <input id="job-input" type="text" placeholder="Graphiste, maçon, second de cuisine..." onInput={this.autocompleteJob} value={jobText} onKeyDown={this.keyPressAutoCompleteJob} />
             </div>
 
-            { jobError ? <ErrorMessage text="Erreur lors de la récupération des métiers" /> : null }
-            { noResult && canShowNoResult ? <ErrorMessage text="Nous n'avons pas compris le métier que vous recherchez. Essayez avec une autre orthographe" /> : null }
+            {jobError ? <ErrorMessage text="Erreur lors de la récupération des métiers" /> : null}
+            {noResult && canShowNoResult ? <ErrorMessage text="Nous n'avons pas compris le métier que vous recherchez. Essayez avec une autre orthographe" /> : null}
 
             <div class="submit-container">
               <button id="submit" type="submit" class="button">Valider</button>

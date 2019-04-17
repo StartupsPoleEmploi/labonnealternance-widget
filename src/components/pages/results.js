@@ -35,16 +35,7 @@ export default class Results extends Component {
     const store = this.props.store;
     const companies = this.state.results.companies;
     const companyCount = this.state.results.companies_count;
-
     const entreprisesNumber = companyCount - RESULT_NUMBER;
-
-    if(entreprisesNumber <= 0) {
-      return <div>
-        <div className="link-container button">
-          <a target="_blank" title="(Nouvelle fenêtre)" href={this.state.lbaURL}>Découvrez d’autres entreprises partout en France</a>
-        </div>
-      </div>
-    }
 
     const extraData = {
       location: store.locationChosen,
@@ -52,34 +43,47 @@ export default class Results extends Component {
       jobText: store.jobText,
     }
 
+    if (entreprisesNumber <= 0) {
+      return (
+
+        <div>
+          {companies.map((company, index) => (index < RESULT_NUMBER && <CompanyItem company={company} {...extraData} />))}
+          <div className="link-container button">
+            <a target="_blank" title="(Nouvelle fenêtre)" href={this.state.lbaURL}>Découvrez d’autres entreprises partout en France</a>
+          </div>
+        </div>
+      );
+    }
+
+
     return (
       <div>
-        {companies.map((company, index) => (index < RESULT_NUMBER && <CompanyItem company={company} {...extraData} />)) }
+        {companies.map((company, index) => (index < RESULT_NUMBER && <CompanyItem company={company} {...extraData} />))}
         <div className="link-container button">
-          <a target="_blank" title="(Nouvelle fenêtre)" href={this.state.lbaURL}>Découvrez {entreprisesNumber} autres entreprises</a>
+          <a target="_blank" title="(Nouvelle fenêtre)" href={this.state.lbaURL}>Découvrez {entreprisesNumber} {entreprisesNumber > 1 ? 'autres entreprises' : 'autre entreprise'}</a>
         </div>
       </div>
     );
   }
-  render({}, {requestOccuring, requestError, results }) {
+  render({ }, { requestOccuring, requestError, results }) {
     return (
       <main id="results">
         <div className="result-title">
           {requestOccuring ? <h1>Un instant, nous recherchons des entreprises</h1> : <h1>Résultats de votre recherche</h1>}
-          {requestOccuring ? null : <Link dispatchFn={this.props.dispatch} step={WIDGET_STEPS.SEARCH_JOB} title="Retour à la page de recherche">Retour</Link> }
+          {requestOccuring ? null : <Link dispatchFn={this.props.dispatch} step={WIDGET_STEPS.SEARCH_JOB} title="Retour à la page de recherche">Retour</Link>}
         </div>
         <div>
-          { requestOccuring ? <Loader /> : null }
-          { !requestOccuring && requestError ? <ErrorMessage text="Erreur lors de la récupération des résultats. Veuillez réessayer ultérieurement." /> : null }
-          { !requestOccuring && isEmpty(results.companies) ?
+          {requestOccuring ? <Loader /> : null}
+          {!requestOccuring && requestError ? <ErrorMessage text="Erreur lors de la récupération des résultats. Veuillez réessayer ultérieurement." /> : null}
+          {!requestOccuring && isEmpty(results.companies) ?
             <div className="center">
               <div>Désolé, nous n’avons pas trouvé d’entreprises.</div>
               <Link dispatchFn={this.props.dispatch} className="button" step={WIDGET_STEPS.SEARCH}>
                 Vous pouvez faire une nouvelle recherche
               </Link>
 
-            </div> : null }
-          { !requestOccuring && !isEmpty(results.companies) ? this.renderResults() : null }
+            </div> : null}
+          {!requestOccuring && !isEmpty(results.companies) ? this.renderResults() : null}
         </div>
       </main>
     );
