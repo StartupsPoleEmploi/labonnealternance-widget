@@ -15,7 +15,8 @@ export default class FilterJobs extends Component {
         this.state = {
             jobSuggestions: this.props.store.jobSuggestions,
             jobSelectedIndex: -1,
-            jobsChosen
+            jobsChosen,
+            showNoJobSelected: false
         }
     }
 
@@ -63,22 +64,21 @@ export default class FilterJobs extends Component {
     submitForm = (e) => {
         e.preventDefault();
 
-        if (this.state.jobsChosen.length === 0) return;
+        if (this.state.jobsChosen.length === 0) {
+            this.setState({ showNoJobSelected: true });
+            return;
+        }
 
         this.props.dispatch({ action: ACTIONS.SET_JOBS_CHOSEN, data: { jobsChosen: this.state.jobsChosen } });
         this.props.dispatch({ action: ACTIONS.SET_STEP, data: { step: WIDGET_STEPS.SEARCH_LOCATION } });
     }
 
-    render(props, state) {
-        const { jobSuggestions, jobSelectedIndex, jobsChosen } = state;
+    render(props, { jobSuggestions, jobSelectedIndex, jobsChosen, showNoJobSelected }) {
 
         return (
             <main id="filter-jobs">
 
-                <div className="result-title">
-                    <h1>Choisissez les métiers qui vous intéressent</h1>
-                    <Link dispatchFn={this.props.dispatch} step={WIDGET_STEPS.SEARCH_JOB} title="Retour à la sélection du métier">Retour</Link>
-                </div>
+                <h1>Sélectionnez les métiers qui vous intéressent</h1>
 
                 <form method="POST" action={WIDGET_STEPS.RESULTS} onSubmit={this.submitForm}>
                     <ul className="suggestion" role="listbox">{
@@ -100,7 +100,10 @@ export default class FilterJobs extends Component {
                         })}
                     </ul>
 
+                    { showNoJobSelected ? <ErrorMessage text=" Pour passer à l'étape suivante, vous devez choisir au moins un métier." /> : null }
+
                     <div class="submit-container">
+                        <Link dispatchFn={this.props.dispatch} step={WIDGET_STEPS.SEARCH_JOB} title="Retour à la sélection du métier" className="return-link">Retour</Link>
                         <button id="submit" type="submit" class="button">Valider</button>
                     </div>
                 </form>

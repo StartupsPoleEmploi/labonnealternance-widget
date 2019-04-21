@@ -87,11 +87,8 @@ export default class SearchLocation extends Component {
         return (
             <main id="search-location">
                 <div id="location-form-step">
-                    <div className="result-title">
-                        <h1><label for="location-input">Où cherchez-vous votre entreprise ?</label></h1>
-                        <Link dispatchFn={this.props.dispatch} step={WIDGET_STEPS.FILTER_JOBS} title="Retour à la sélection des métiers">Retour</Link>
-                    </div>
 
+                    <h1><label for="location-input">Où cherchez-vous votre entreprise ?</label></h1>
 
                     <form method="POST" action={WIDGET_STEPS.RESULTS} onSubmit={this.submitForm}>
 
@@ -99,6 +96,7 @@ export default class SearchLocation extends Component {
                         {this.renderLocationSuggestion()}
 
                         <div class="submit-container">
+                            <Link dispatchFn={this.props.dispatch} step={WIDGET_STEPS.FILTER_JOBS} title="Retour à la sélection des métiers" className="return-link">Retour</Link>
                             <button id="submit" type="submit" class="button">C'est parti !</button>
                         </div>
                     </form>

@@ -77,9 +77,13 @@ labonnealternance-widget {
   labonnealternance-widget #search-jobs #job-form-step, labonnealternance-widget #search-jobs #location-form-step, labonnealternance-widget #search-jobs .submit-container, labonnealternance-widget #filter-jobs #job-form-step, labonnealternance-widget #filter-jobs #location-form-step, labonnealternance-widget #filter-jobs .submit-container, labonnealternance-widget #search-location #job-form-step, labonnealternance-widget #search-location #location-form-step, labonnealternance-widget #search-location .submit-container {
     margin-top: 30px; }
   labonnealternance-widget #search-jobs h1, labonnealternance-widget #filter-jobs h1, labonnealternance-widget #search-location h1 {
-    margin-bottom: 10px; }
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 1.5em; }
   labonnealternance-widget #search-jobs .submit-container, labonnealternance-widget #filter-jobs .submit-container, labonnealternance-widget #search-location .submit-container {
     text-align: center; }
+    labonnealternance-widget #search-jobs .submit-container a.return-link, labonnealternance-widget #filter-jobs .submit-container a.return-link, labonnealternance-widget #search-location .submit-container a.return-link {
+      margin-right: 50px; }
     labonnealternance-widget #search-jobs .submit-container input, labonnealternance-widget #filter-jobs .submit-container input, labonnealternance-widget #search-location .submit-container input {
       font-size: 1.5em; }
   labonnealternance-widget #search-jobs ul.suggestion, labonnealternance-widget #filter-jobs ul.suggestion, labonnealternance-widget #search-location ul.suggestion {

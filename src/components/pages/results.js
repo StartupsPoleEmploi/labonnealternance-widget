@@ -48,8 +48,8 @@ export default class Results extends Component {
 
         <div>
           {companies.map((company, index) => (index < RESULT_NUMBER && <CompanyItem company={company} {...extraData} />))}
-          <div className="link-container button">
-            <a target="_blank" title="(Nouvelle fenêtre)" href={this.state.lbaURL}>Découvrez d’autres entreprises partout en France</a>
+          <div className="link-container">
+            <a target="_blank" className="button" title="(Nouvelle fenêtre)" href={this.state.lbaURL}>Découvrez d’autres entreprises partout en France</a>
           </div>
         </div>
       );
@@ -59,8 +59,8 @@ export default class Results extends Component {
     return (
       <div>
         {companies.map((company, index) => (index < RESULT_NUMBER && <CompanyItem company={company} {...extraData} />))}
-        <div className="link-container button">
-          <a target="_blank" title="(Nouvelle fenêtre)" href={this.state.lbaURL}>Découvrez {entreprisesNumber} {entreprisesNumber > 1 ? 'autres entreprises' : 'autre entreprise'}</a>
+        <div className="link-container">
+          <a target="_blank" className="button" title="(Nouvelle fenêtre)" href={this.state.lbaURL}>Découvrez {entreprisesNumber} {entreprisesNumber > 1 ? 'autres entreprises' : 'autre entreprise'}</a>
         </div>
       </div>
     );
