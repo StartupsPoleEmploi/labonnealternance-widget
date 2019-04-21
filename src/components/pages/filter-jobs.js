@@ -100,7 +100,7 @@ export default class FilterJobs extends Component {
                         })}
                     </ul>
 
-                    { showNoJobSelected ? <ErrorMessage text=" Pour passer à l'étape suivante, vous devez choisir au moins un métier." /> : null }
+                    { showNoJobSelected ? <ErrorMessage text="Pour passer à l'étape suivante, vous devez choisir au moins un métier." /> : null }
 
                     <div class="submit-container">
                         <Link dispatchFn={this.props.dispatch} step={WIDGET_STEPS.SEARCH_JOB} title="Retour à la sélection du métier" className="return-link">Retour</Link>
