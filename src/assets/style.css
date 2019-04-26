@@ -129,7 +129,8 @@ labonnealternance-widget {
     text-align: center; }
     labonnealternance-widget #results .link-container a {
       color: white;
-      text-decoration: none; }
+      text-decoration: none;
+      display: inline-block; }
       labonnealternance-widget #results .link-container a:hover {
         text-decoration: underline;
         cursor: pointer; }
