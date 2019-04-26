@@ -33,6 +33,7 @@ labonnealternance-widget {
 		font-size: 25px;
 		text-decoration: none;
 		border: none;
+		display: inline-block;
 
 		&:hover {
 			background-color: $blue-hover;

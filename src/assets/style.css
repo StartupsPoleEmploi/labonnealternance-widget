@@ -29,7 +29,8 @@ labonnealternance-widget {
     font-weight: bold;
     font-size: 25px;
     text-decoration: none;
-    border: none; }
+    border: none;
+    display: inline-block; }
     labonnealternance-widget .button:hover {
       background-color: #0562CE;
       cursor: pointer; }
