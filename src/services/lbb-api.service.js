@@ -10,7 +10,7 @@ export const DOMAIN = 'https://labonnealternance.pole-emploi.fr';
 const ESD_URL = 'https://api.emploi-store.fr/partenaire/labonnealternance/v1/company/?pageSize=3&page=1';
 const SUGGEST_JOBS_URL = `${DOMAIN}/api/labonneboite/suggest_jobs?term=`;
 const SUGGEST_CITY_URL = `${DOMAIN}/api/labonneboite/suggest_cities?term=`;
-const GET_COMPANIES_URL = `${DOMAIN}/api/labonneboite/get_companies?page=1&pageSize=3&distance=60`;
+const GET_COMPANIES_URL = `${DOMAIN}/api/labonneboite/get_hidden_market_companies?page=1&pageSize=3&distance=60`;
 
 class LBBServiceInstance {
     constructor({ widgetName, ESDToken, useESD, dispatchFn }) {
