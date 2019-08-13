@@ -36,7 +36,6 @@ export default class SearchJobs extends Component {
       .catch(() => this.setState({ jobError: true }));
   }
 
-
   // VALIDATION
   submitForm = (e) => {
     e.preventDefault();
@@ -48,11 +47,16 @@ export default class SearchJobs extends Component {
       return;
     }
 
-    // Go to filter page or location page
-    if (jobSuggestions.length === 1) this.props.dispatch({ action: ACTIONS.SET_STEP, data: { step: WIDGET_STEPS.SEARCH_LOCATION } });
-    else this.props.dispatch({ action: ACTIONS.SET_STEP, data: { step: WIDGET_STEPS.FILTER_JOBS } });
+    if (jobSuggestions.length === 1) {
+      // only one job match => select it automatically and skip to location page
+      this.setState({ jobsChosen: jobSuggestions });
+      this.props.dispatch({ action: ACTIONS.SET_JOBS_CHOSEN, data: { jobsChosen: this.state.jobsChosen } });
+      this.props.dispatch({ action: ACTIONS.SET_STEP, data: { step: WIDGET_STEPS.SEARCH_LOCATION } });
+    } else {
+      // several jobs match => go to job filter page to make user select a subset
+      this.props.dispatch({ action: ACTIONS.SET_STEP, data: { step: WIDGET_STEPS.FILTER_JOBS } });
+    }
   }
-
 
   // RENDER
   render({ }, { jobText, jobError, canShowNoResult }) {
