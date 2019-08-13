@@ -3,14 +3,12 @@ import Link from "../generics/link";
 import { WIDGET_STEPS, ACTIONS } from "../../services/store";
 import ErrorMessage from "../generics/error";
 
-
 export default class FilterJobs extends Component {
 
     constructor(props) {
         super(props);
 
         const jobsChosen = this.props.store.jobsChosen || [];
-
 
         this.state = {
             jobSuggestions: this.props.store.jobSuggestions,
@@ -19,7 +17,6 @@ export default class FilterJobs extends Component {
             showNoJobSelected: false
         }
     }
-
 
     autocompleteJob = (e) => {
         const jobInputText = e.target.value;
