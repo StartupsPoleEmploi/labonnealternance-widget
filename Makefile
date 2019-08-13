@@ -7,4 +7,4 @@ build: clean
 
 start-widget-no-esd: build
 	echo Please load the following URL in your browser: http://127.0.0.1:8093/widget-no-esd.html
-	cd web && python -m SimpleHTTPServer 8093
+	cd web && python -m http.server 8093
