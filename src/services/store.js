@@ -31,7 +31,7 @@ export const reducer = (state = initialState, action) => {
 
         case 'SET_JOB_SUGGESTIONS':
             // Limit to ten results
-            const jobSuggestions = action.data.jobSuggestions.slice(1,10);
+            const jobSuggestions = action.data.jobSuggestions.slice(0,10);
             return { ...state, jobSuggestions }
 
         case 'SET_JOBS_CHOSEN':
