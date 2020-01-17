@@ -10,7 +10,7 @@ export default class SearchJobs extends Component {
   constructor(props) {
     super(props);
 
-    const jobText = this.props.store.jobText || '';
+    const jobText = '';
 
     this.state = { jobText, canShowNoResult: false }
   }
