@@ -8,7 +8,7 @@ export default class FilterJobs extends Component {
     constructor(props) {
         super(props);
 
-        const jobsChosen = this.props.store.jobsChosen || [];
+        const jobsChosen = [];
 
         this.state = {
             jobSuggestions: this.props.store.jobSuggestions,
