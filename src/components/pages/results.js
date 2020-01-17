@@ -78,7 +78,7 @@ export default class Results extends Component {
           {!requestOccuring && isEmpty(results.companies) ?
             <div className="center">
               <div>Désolé, nous n’avons pas trouvé d’entreprises.</div>
-              <Link dispatchFn={this.props.dispatch} className="button" step={WIDGET_STEPS.SEARCH}>
+              <Link dispatchFn={this.props.dispatch} className="button" step={WIDGET_STEPS.SEARCH_JOB}>
                 Vous pouvez faire une nouvelle recherche
               </Link>
 
